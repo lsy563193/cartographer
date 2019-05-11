@@ -1,0 +1,17 @@
+
+位姿:
+struct TimedPose
+pose_queue_duration_ time_pose_dueqe_的时长，如果两帧数据小于他则不添加
+time_pose_dueqe_ 位姿队列，长度为２，用于计算两帧之间的线速度和角速度
+linear_velocity_from_poses_ 添加pose可计算出来的线速度
+angular_velocity_from_poses_ 添加pose可计算出来的角速度
+
+gravity_time_constant_　引力常数　9.8或10和看你的陀螺仪一致
+imu_tracker_ 添加pose时的方向，
+odometry_imu_tracker_ 是使用odom计算在新的两个pose之间的偏移转角,再更新角速度。因为一般odom的频率会比scan快，在两帧scan之间的位姿就由odom来补偿
+extrapolation_imu_tracker_ 用于估算两个pose之间的在某一时刻的偏移转角，如果有imu则用imu数据，否则使用odom角速度来估算
+cached_extrapolated_pose_ 上一次估算的位姿缓存
+
+odometry_data_;
+linear_velocity_from_odometry_
+angular_velocity_from_odometry_
